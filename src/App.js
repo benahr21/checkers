@@ -1,25 +1,72 @@
-import logo from './logo.svg';
 import './App.css';
+import Row from './components/Row';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [
+        [' ', 'o', ' ', 'o', ' ', 'o', ' ', 'o'],
+        ['o', ' ', 'o', ' ', 'o', ' ', 'o', ' '],
+        [' ', 'o', ' ', 'o', ' ', 'o', ' ', 'o'],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        ['O', ' ', 'O', ' ', 'O', ' ', 'O', ' '],
+        [' ', 'O', ' ', 'O', ' ', 'O', ' ', 'O'],
+        ['O', ' ', 'O', ' ', 'O', ' ', 'O', ' '],
+      ],
+      whiteTurn: true,
+      history: [],
+    };
+  }
+  render() {
+    return (
+      <table className='no-border'>
+        <thead>
+          <tr>
+            <th></th>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th>d</th>
+            <th>e</th>
+            <th>f</th>
+            <th>g</th>
+            <th>h</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.data.map((rowData, index) => {
+            const number = this.state.data.length - index - 1;
+
+            return (
+              <Row
+                key={number.toString()}
+                number={number}
+                data={rowData}
+                gameState={this.state}
+              />
+            );
+          })}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th>d</th>
+            <th>e</th>
+            <th>f</th>
+            <th>g</th>
+            <th>h</th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
+    );
+  }
 }
-
 export default App;
